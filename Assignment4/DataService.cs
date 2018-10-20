@@ -73,7 +73,7 @@ namespace Assignment4
                 return false;
                 }
             }
-        public bool DeleteCategory(int id)
+       /* public bool DeleteCategory(int id)
         {
 
             using (var db = new NorthwindContex())
@@ -90,8 +90,8 @@ namespace Assignment4
                 }
                 return false;
             }
-        }
-        /*public bool DeleteCategory(int id)
+        }*/
+        public bool DeleteCategory(int id)
         {
             try
             {
@@ -106,17 +106,26 @@ namespace Assignment4
 
                         return true;
                     }
-                    else if (delCat == null) return false;
+                     return false;
                 }
             }
             catch (Exception) { }
             return false;
-        }*/
+        }
 
 
         /// <summary>
         /// Product Tests
         /// </summary>
+        /// 
+        public List<Product> GetProduct()
+        {
+            using (var db = new NorthwindContex())
+            {
+                return db.Products.ToList();
+            }
+
+        }
         public Product GetProduct(int productId)
         {
             using (var db = new NorthwindContex())
@@ -132,7 +141,8 @@ namespace Assignment4
         {
             using (var db = new NorthwindContex())
             {
-                var product = db.Products.Where(x => x.Name.ToLower().Contains(productName.ToLower()));
+                var product = db.Products
+                    .Where(x => x.Name.ToLower().Contains(productName.ToLower()));
 
                 return product.ToList();
             }

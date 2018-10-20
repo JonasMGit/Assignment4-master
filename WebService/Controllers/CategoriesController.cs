@@ -50,7 +50,7 @@ namespace WebService.Controllers
         
 
         [HttpPut("{id}")]
-        public IActionResult UpdateCategory(Category category)
+        public IActionResult UpdateCategory([FromBody]Category category)
         {
             var cat = _dataService.UpdateCategory(category.Id, category.Name, category.Description);
             if (!cat) return NotFound(cat);
@@ -58,7 +58,7 @@ namespace WebService.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteCategory(int id)
+        public IActionResult Delete(int id)
         {
             var del = _dataService.DeleteCategory(id);
 

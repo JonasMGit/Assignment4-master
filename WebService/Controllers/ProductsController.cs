@@ -22,8 +22,40 @@ namespace WebService.Controllers
         [HttpGet]
         public IActionResult GetProducts()
         {
-            var data = _dataService.GetCategory();
+            var data = _dataService.GetProduct();
+            
+            return Ok(data);
+        }
 
+        [HttpGet("/{id}")]
+        public IActionResult GetProductValidId(int id)
+        {
+            var data = _dataService.GetProduct(id);
+            if (data == null ) return NotFound();
+            return Ok(data);
+        }
+
+        [HttpGet("category/{id}")]
+        public IActionResult GetProductsByInvalidId(int id)
+        {
+            var data = _dataService.GetProductByCategory(id);
+            if (data.Count == 0) return NotFound(data);
+            return Ok(data);
+        }
+
+       /* [HttpGet("category/{id}")]
+        public IActionResult GetProductById(int id)
+        {
+            var data = _dataService.GetProductByCategory(id);
+            if (data.Count == 0) return NotFound();
+            return Ok(data);
+        }*/
+
+        [HttpGet("name/{name}")]
+        public IActionResult GetProductsByName(string name)
+        {
+            var data = _dataService.GetProductByName(name);
+            if (data.Count == 0) return NotFound(data);
             return Ok(data);
         }
     }
