@@ -20,5 +20,11 @@ namespace WebService
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+
+        public static IWebHost BuildWebHost(string[]args) =>
+            WebHost.CreateDefaultBuilder(args)
+            .UseStartup<Startup>()
+            .UseUrls("http://localhost:5001/")
+            .Build();
     }
 }
