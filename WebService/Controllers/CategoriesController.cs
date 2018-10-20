@@ -7,6 +7,7 @@ using Assignment4;
 
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using WebService.Model;
 //using WebService.Models;
 
 namespace WebService.Controllers
@@ -25,7 +26,7 @@ namespace WebService.Controllers
         [HttpGet]
         public IActionResult GetCategories()
         {
-            var data = _dataService.GetProducts();
+            var data = _dataService.GetCategory();
 
             return Ok(data);
         }
@@ -34,24 +35,39 @@ namespace WebService.Controllers
         public IActionResult GetCategory(int id)
         {
             var cat = _dataService.GetCategory(id);
-            if (cat == null) return NotFound();
+            if (cat == null) return NotFound(cat);
             return Ok(cat);
         }
-        /*
+        
         [HttpPost]
-        public IActionResult AddCategory(CategoryPostAndPutModel category)
+        public IActionResult CreateCategory([FromBody]Category category)
         {
-            _dataService.CreateCategory(category.Name);
-            return Ok();
+            _dataService.CreateCategory(category.Name, category.Description);
+
+            return Created($"api/categories/{category}", category);
         }
 
+        
+
         [HttpPut("{id}")]
-        public IActionResult UpdateCategory(int id, CategoryPostAndPutModel category)
+        public IActionResult UpdateCategory(Category category)
         {
-            var cat = _dataService.UpdateCategory(id, category.Name);
-            if (cat == null) return NotFound();
+            var cat = _dataService.UpdateCategory(category.Id, category.Name, category.Description);
+            if (!cat) return NotFound(cat);
             return Ok(cat);
         }
-        */
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCategory(int id)
+        {
+            var del = _dataService.DeleteCategory(id);
+
+            if (!del)
+            {
+                return NotFound();
+            }
+            return Ok(del);
+        }
+
     }
 }

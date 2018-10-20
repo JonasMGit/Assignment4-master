@@ -22,7 +22,7 @@ namespace WebService.Controllers
         [HttpGet]
         public IActionResult GetProducts()
         {
-            var data = _dataService.GetProducts();
+            var data = _dataService.GetCategory();
 
             return Ok(data);
         }

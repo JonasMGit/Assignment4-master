@@ -22,7 +22,7 @@ namespace Assignment4.Tests
         public void GetAllCategories_NoArgument_ReturnsAllCategories()
         {
             var service = new DataService();
-            var categories = service.GetProducts();
+            var categories = service.GetCategory();
             Assert.Equal(8, categories.Count);
             Assert.Equal("Beverages", categories.First().Name);
         }

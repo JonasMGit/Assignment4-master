@@ -7,10 +7,21 @@ namespace Assignment4
 {
     public class DataService
     {
+        //henricks code
+        /*public void CreateCategory(string categoryName)
+        {
+            GetProducts().Add(new Category()
+            {
+                Id = GetProducts().Max(x => x.Id) + 1,
+                Name = categoryName
+            });
+        }*/
+
+       
         /// <summary>
         /// Category Tests
         /// </summary>
-        public List<Category> GetProducts()
+        public List<Category> GetCategory()
         {
             using (var db = new NorthwindContex())
             {
@@ -29,7 +40,7 @@ namespace Assignment4
         {
             using (var db = new NorthwindContex())
             {
-                var count = GetProducts();
+                var count = GetCategory();
                 var newCat = new Category()
                 {
                     Id = count.Count() + 1,
@@ -42,7 +53,45 @@ namespace Assignment4
             }
 
         }
+        
+
+      
+
+        public bool UpdateCategory(int categoryId, String name, String description)
+        {
+            
+                using (var db = new NorthwindContex())
+                {
+                    var category = db.Categories.FirstOrDefault(x => x.Id == categoryId);
+                if(category != null)
+                {
+                    category.Name = name;
+                    category.Description = description;
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+                }
+            }
         public bool DeleteCategory(int id)
+        {
+
+            using (var db = new NorthwindContex())
+            {
+                var category = db.Categories.FirstOrDefault(x => x.Id == id);
+
+                if (category != null)
+                {
+                    db.Categories.Remove(category);
+                    
+                    db.SaveChanges();
+
+                    return true;
+                }
+                return false;
+            }
+        }
+        /*public bool DeleteCategory(int id)
         {
             try
             {
@@ -57,33 +106,13 @@ namespace Assignment4
 
                         return true;
                     }
-                    else return false;
+                    else if (delCat == null) return false;
                 }
             }
-            catch (Exception) { } return false;
-        }
-
-        /* public object UpdateCategory(int id, string v1, string v2)
-        {
-            throw new NotImplementedException();
+            catch (Exception) { }
+            return false;
         }*/
 
-        public bool UpdateCategory(int categoryId, String name, String description)
-        {
-            try
-            {
-                using (var db = new NorthwindContex())
-                {
-                    var category = db.Categories.FirstOrDefault(x => x.Id == categoryId);
-
-                    category.Name = name;
-                    category.Description = description;
-                    db.SaveChanges();
-                    return true;
-                }
-            }
-            catch (Exception) { } return false;
-        }
 
         /// <summary>
         /// Product Tests
