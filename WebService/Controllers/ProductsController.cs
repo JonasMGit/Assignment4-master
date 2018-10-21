@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Assignment4;
 using Microsoft.AspNetCore.Mvc;
+using WebService.DTO;
 
 namespace WebService.Controllers
 
@@ -20,7 +21,7 @@ namespace WebService.Controllers
         }
 
         //Not working
-        /*
+        
         [HttpGet]
         public IActionResult GetProducts()
         {
@@ -28,15 +29,15 @@ namespace WebService.Controllers
             
             return Ok(data);
         }
-        */
+        
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetProductValidId(int id)
         {
             var data = _dataService.GetProduct(id);
             if (data == null ) return NotFound(data);
             return Ok(data);
-        }*/
+        }
         
 
             //Works good for ApiProducts_CategoryInvalid_EmptyListNotFound
@@ -45,27 +46,49 @@ namespace WebService.Controllers
         {
             var data = _dataService.GetProductByCategory(id);
             if (data.Count == 0) return NotFound(data);
-            return Ok(data);
-        } 
 
-        /*
-       [HttpGet("category/{id}")]
-        public IActionResult GetProductById(int id)
-        {
-            var data = _dataService.GetProductByCategory(id);
-            if (data.Count == 0) return NotFound();
-            return Ok(data);
-        }*/
-        
+            List<Dto> dtoProducts = new List<Dto>();
+
+            foreach (var i in data)
+            {
+                var productDto = new Dto()
+                {
+                    Id = i.Id,
+                    Name = i.ProductName,
+                    CategoryId = i.CategoryId,
+                    CategoryName = i.Category.Name
+                   
+                };
+                dtoProducts.Add(productDto);
+            }
+
+            return Ok(dtoProducts);
+
+           
+        }      
 
             //Works good and Passed for two test
             //ApiProducts_NameContained... and ApiProductNameNotContained...
         [HttpGet("name/{name}")]
         public IActionResult GetProductsByName(string name)
         {
-            var data = _dataService.GetProductByName(name);
+            var data = _dataService.GetProductByName(name); ;
             if (data.Count == 0) return NotFound(data);
-            return Ok(data);
+
+            List<Dto> dtoProducts = new List<Dto>();
+
+            foreach(var i in data)
+            {
+                var productdto = new Dto()
+                {
+                    Id = i.Id,
+                    Name = i.ProductName,
+                    CategoryId = i.CategoryId,
+                    CategoryName = i.Category.Name
+                };
+                dtoProducts.Add(productdto);
+            }
+            return Ok(dtoProducts);
         }
     }
 }

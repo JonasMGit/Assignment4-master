@@ -7,17 +7,6 @@ namespace Assignment4
 {
     public class DataService
     {
-        //henricks code
-        /*public void CreateCategory(string categoryName)
-        {
-            GetProducts().Add(new Category()
-            {
-                Id = GetProducts().Max(x => x.Id) + 1,
-                Name = categoryName
-            });
-        }*/
-
-       
         /// <summary>
         /// Category Tests
         /// </summary>
@@ -53,10 +42,7 @@ namespace Assignment4
             }
 
         }
-        
-
-      
-
+     
         public bool UpdateCategory(int categoryId, String name, String description)
         {
             
@@ -73,7 +59,7 @@ namespace Assignment4
                 return false;
                 }
             }
-       /* public bool DeleteCategory(int id)
+        public bool DeleteCategory(int id)
         {
 
             using (var db = new NorthwindContex())
@@ -90,28 +76,8 @@ namespace Assignment4
                 }
                 return false;
             }
-        }*/
-        public bool DeleteCategory(int id)
-        {
-            try
-            {
-                using (var db = new NorthwindContex())
-                {
-                    var delCat = new Category() { Id = id };
-                    db.Categories.Remove(delCat);
-                    db.SaveChanges();
-                    if (delCat != null)
-                    {
-
-                        return true;
-                    }
-                     return false;
-                }
-            }
-            catch (Exception) { }
-            return false;
         }
-
+ 
 
         /// <summary>
         /// Product Tests
@@ -141,6 +107,7 @@ namespace Assignment4
             using (var db = new NorthwindContex())
             {
                 var product = db.Products
+                    .Include(x => x.Category)
                     .Where(x => x.ProductName.ToLower().Contains(productName.ToLower()));
 
                 return product.ToList();
@@ -166,7 +133,7 @@ namespace Assignment4
                 return db.Orders.ToList();
             }
         }
-        //not done
+      
         public Order GetOrder(int id)
         {
             using (var db = new NorthwindContex())
@@ -190,8 +157,6 @@ namespace Assignment4
                     .ToList();
             }
         }
-       
-
             public List<OrderDetails> GetOrderDetailsByProductId(int id)
         {
             using (var db = new NorthwindContex())
@@ -203,12 +168,7 @@ namespace Assignment4
                     .ToList();
             }
         }
-
-
-
-
      }
 } 
 
-   // }
-//}
+ 

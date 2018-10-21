@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Assignment4;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using WebService.Model;
+//using WebService.Model;
 //using WebService.Models;
 
 namespace WebService.Controllers
@@ -23,14 +23,14 @@ namespace WebService.Controllers
         }
 
         //Not working
-        /*
+        
         [HttpGet]
         public IActionResult GetCategories()
         {
             var data = _dataService.GetCategory();
 
             return Ok(data);
-        }*/
+        }
         
         //Works good for ApiCategories_GetWithValidCategoryId_OkAndCategory
 
@@ -53,7 +53,7 @@ namespace WebService.Controllers
             return Created($"api/categories/{category}", category);
         }
         
-        /*
+        
         //This code is not working
         [HttpPut("{id}")]
         public IActionResult UpdateCategory([FromBody]Category category)
@@ -62,7 +62,7 @@ namespace WebService.Controllers
             if (!cat) return NotFound(cat);
             return Ok(cat);
         }
-        */
+        
         
             //works good for ApiCategories_DeleteWithValid_Ok
 
@@ -73,7 +73,7 @@ namespace WebService.Controllers
 
             if (!del)
             {
-                return NotFound();
+                return NotFound(del);
             }
             return Ok(del);
         }
