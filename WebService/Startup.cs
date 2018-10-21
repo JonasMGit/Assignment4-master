@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Assignment4;
-//using DomainModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,12 +28,6 @@ namespace WebService
                 app.UseDeveloperExceptionPage();
             }
             app.UseMvc();
-
-            /*
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            }); */
         }
     }
 }

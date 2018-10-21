@@ -13,7 +13,6 @@ namespace Assignment4
         [Column("orderid")]
         public int OrderId { get; set; }
 
-
         [Column("productid")]
         public int ProductId { get; set; }
 
@@ -26,10 +25,10 @@ namespace Assignment4
         [Column("discount")]
         public double Discount { get; set; }
 
-        //[Column("product")]
+
         public Product Product { get; set; }
 
-        // [Column("order")]
+
         public Order Order { get; set; }
 
         

@@ -18,6 +18,7 @@ namespace Assignment4
             }
 
         }
+
         public Category GetCategory(int index)
         {
             using (var db = new NorthwindContex())
@@ -25,6 +26,7 @@ namespace Assignment4
                 return db.Categories.Find(index);
             }
         }
+
         public Category CreateCategory(string name, string description)
         {
             using (var db = new NorthwindContex())
@@ -45,20 +47,20 @@ namespace Assignment4
      
         public bool UpdateCategory(int categoryId, String name, String description)
         {
-            
                 using (var db = new NorthwindContex())
                 {
                     var category = db.Categories.FirstOrDefault(x => x.Id == categoryId);
                 if(category != null)
-                {
-                    category.Name = name;
-                    category.Description = description;
-                    db.SaveChanges();
-                    return true;
-                }
+                    {
+                        category.Name = name;
+                        category.Description = description;
+                        db.SaveChanges();
+                        return true;
+                    }
                 return false;
                 }
-            }
+         }
+
         public bool DeleteCategory(int id)
         {
 
@@ -91,6 +93,7 @@ namespace Assignment4
             }
 
         }
+
         public Product GetProduct(int productId)
         {
             using (var db = new NorthwindContex())
@@ -144,7 +147,6 @@ namespace Assignment4
                     ThenInclude(x => x.Category)
                     .FirstOrDefault(x =>x.Id == id);
             }
-
         }
 
         public List<OrderDetails> GetOrderDetailsByOrderId(int orderid)
@@ -157,17 +159,18 @@ namespace Assignment4
                     .ToList();
             }
         }
+
             public List<OrderDetails> GetOrderDetailsByProductId(int id)
-        {
-            using (var db = new NorthwindContex())
             {
-                return db.OrderDetails
-                    .Include(x => x.Order)
-                    .Where(x => x.ProductId == id)
-                    .OrderBy(x => x.Order.Date)
-                    .ToList();
+            using (var db = new NorthwindContex())
+                {
+                    return db.OrderDetails
+                        .Include(x => x.Order)
+                        .Where(x => x.ProductId == id)
+                        .OrderBy(x => x.Order.Date)
+                        .ToList();
+                }
             }
-        }
      }
 } 
 

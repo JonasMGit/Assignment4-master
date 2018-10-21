@@ -51,11 +51,9 @@ namespace Assignment4.Tests
         [Fact]
         public void DeleteCategory_ValidId_RemoveTheCategory()
         {
-            //This should pass if the Assert.true error can be fixed --Jonas
             var service = new DataService();
             var category = service.CreateCategory("Test", "DeleteCategory_ValidId_RemoveTheCategory");
             var result = service.DeleteCategory(category.Id);
-            //not sure what issue is with Assert.True. Maybe something is missing in test
             Assert.True(result); 
             category = service.GetCategory(category.Id);
             Assert.Null(category);
@@ -63,7 +61,6 @@ namespace Assignment4.Tests
         
         [Fact]
         public void DeleteCategory_InvalidId_ReturnsFalse()
-            //should work same issue as above--Jonas
         {
             var service = new DataService();
             var result = service.DeleteCategory(-1);
@@ -208,9 +205,5 @@ namespace Assignment4.Tests
             Assert.Equal(12, orderDetails.First().Quantity);
 
         } 
-
-       // }
-        
-
     }
 }
