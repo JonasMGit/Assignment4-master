@@ -19,6 +19,8 @@ namespace WebService.Controllers
             _dataService = dataService;
         }
 
+        //Not working
+        /*
         [HttpGet]
         public IActionResult GetProducts()
         {
@@ -26,31 +28,38 @@ namespace WebService.Controllers
             
             return Ok(data);
         }
+        */
 
-        [HttpGet("{id}")]
+        [HttpGet("/{id}")]
         public IActionResult GetProductValidId(int id)
         {
             var data = _dataService.GetProduct(id);
             if (data == null ) return NotFound(data);
             return Ok(data);
-        }
+        }*/
+        
 
+            //Works good for ApiProducts_CategoryInvalid_EmptyListNotFound
         [HttpGet("category/{id}")]
         public IActionResult GetProductsByInvalidId(int id)
         {
             var data = _dataService.GetProductByCategory(id);
             if (data.Count == 0) return NotFound(data);
             return Ok(data);
-        }
+        } 
 
-       /* [HttpGet("category/{id}")]
+        /*
+       [HttpGet("category/{id}")]
         public IActionResult GetProductById(int id)
         {
             var data = _dataService.GetProductByCategory(id);
             if (data.Count == 0) return NotFound();
             return Ok(data);
         }*/
+        
 
+            //Works good and Passed for two test
+            //ApiProducts_NameContained... and ApiProductNameNotContained...
         [HttpGet("name/{name}")]
         public IActionResult GetProductsByName(string name)
         {

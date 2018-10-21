@@ -17,7 +17,7 @@ namespace Assignment4
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseNpgsql("host=localhost;db=northwind1;uid=postgres;pwd=postgres");
+            optionsBuilder.UseNpgsql("host=localhost;db=northwind;uid=postgres;pwd=521313");
             //optionsBuilder.UseLoggerFactory(MyLoggerFactory)
                 //.EnableSensitiveDataLogging();
         }
