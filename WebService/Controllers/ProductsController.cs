@@ -27,11 +27,11 @@ namespace WebService.Controllers
             return Ok(data);
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetProductValidId(int id)
         {
             var data = _dataService.GetProduct(id);
-            if (data == null ) return NotFound();
+            if (data == null ) return NotFound(data);
             return Ok(data);
         }
 

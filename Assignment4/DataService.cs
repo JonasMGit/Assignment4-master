@@ -98,7 +98,6 @@ namespace Assignment4
                 using (var db = new NorthwindContex())
                 {
                     var delCat = new Category() { Id = id };
-                    db.Categories.Attach(delCat);
                     db.Categories.Remove(delCat);
                     db.SaveChanges();
                     if (delCat != null)
@@ -142,7 +141,7 @@ namespace Assignment4
             using (var db = new NorthwindContex())
             {
                 var product = db.Products
-                    .Where(x => x.Name.ToLower().Contains(productName.ToLower()));
+                    .Where(x => x.ProductName.ToLower().Contains(productName.ToLower()));
 
                 return product.ToList();
             }

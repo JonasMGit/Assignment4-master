@@ -14,7 +14,7 @@ namespace Assignment4
         public int Id { get; set; }
 
         [Column("productname")]
-        public string Name { get; set; }
+        public string ProductName { get; set; }
         
         [Column("supplierid")]
         public int SupplierId { get; set;}
