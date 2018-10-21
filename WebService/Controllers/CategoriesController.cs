@@ -23,13 +23,17 @@ namespace WebService.Controllers
             _dataService = dataService;
         }
 
+        //Not working
+        /*
         [HttpGet]
         public IActionResult GetCategories()
         {
             var data = _dataService.GetCategory();
 
             return Ok(data);
-        }
+        }*/
+        
+        //Works good for ApiCategories_GetWithValidCategoryId_OkAndCategory
 
         [HttpGet("{id}")]
         public IActionResult GetCategory(int id)
@@ -39,6 +43,9 @@ namespace WebService.Controllers
             return Ok(cat);
         }
         
+        
+        //Works good for ApiCategories_PostWithCategory_Created
+
         [HttpPost]
         public IActionResult CreateCategory([FromBody]Category category)
         {
@@ -46,9 +53,9 @@ namespace WebService.Controllers
 
             return Created($"api/categories/{category}", category);
         }
-
         
-
+        /*
+        //This code is not working
         [HttpPut("{id}")]
         public IActionResult UpdateCategory([FromBody]Category category)
         {
@@ -56,6 +63,9 @@ namespace WebService.Controllers
             if (!cat) return NotFound(cat);
             return Ok(cat);
         }
+        */
+        
+            //works good for ApiCategories_DeleteWithValid_Ok
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
@@ -68,6 +78,6 @@ namespace WebService.Controllers
             }
             return Ok(del);
         }
-
+        
     }
 }
